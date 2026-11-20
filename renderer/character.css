@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 6px 的慢浮动用 30fps 的离散步进就够了，视觉效果几乎一致，
+     但透明窗口的合成次数减半，GPU 占用随之下降 */
+  animation: float 7s steps(105, end) infinite;
+  will-change: transform;
+}
+
+body.dragging .pet,
+body.dragging .clock {
+  cursor: grabbing;
+}
+
+body.dragging .stage {
+  animation-play-state: paused;
+}
+
+/* ---------- 形态切换 ---------- */
+
+.clock {
+  display: none;
+}
+
+body.pet-mode .pet { display: block; }
+body.pet-mode .clock { display: none; }
+
+body.clock-mode .pet { display: none; }
+body.clock-mode .clock { display: flex; }
+
+/* ---------- 王钢蛋本体 ---------- */
+
+.pet {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.layer.on {
+  opacity: 1;
+}
+
+/* ============================================================
+   数字时钟：彩色底 + 周几 / 大号时间 / 日期
+   ============================================================ */
+
+.card.clock {
+  position: absolute;
+  inset: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: grab;
+  /* 没有 box-shadow——窗口外边缘干净 */
+}
+
+/* 背景：红橙渐变底 + 三个黄色圆装饰（KSAplay 风） */
+.background-design {
+  position: absolute;
+  inset: 0;
+  background-color: #ec7263;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle {
+  background-color: #efc745;
+}
+
+.circle:nth-child(1) {
+  position: absolute;
+  top: -75%;
+  right: -45%;
+  width: 260px;
+  height: 260px;
+  opacity: 0.35;
+  border-radius: 50%;
+}
+
+.circle:nth-child(2) {
+  position: absolute;
+  top: -60%;
+  right: -25%;
+  width: 180px;
+  height: 180px;
+  opacity: 0.35;
+  border-radius: 50%;
+}
+
+.circle:nth-child(3) {
+  position: absolute;
+  top: -30%;
+  right: -5%;
+  width: 90px;
+  height: 90px;
+  opacity: 0.9;
+  border-radius: 50%;
+}
+
+/* 三行文字都用白色，z-index:1 保证在背景之上 */
+.time-row,
+.date-row,
+.lunar-row {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+/* 大号时:分，秒缩到旁边，基线对齐 */
+.time-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-main {
+  font-size: 66px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 秒：原来的五分之一（52px → 11px） */
+.time-sec {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.85;
+  transform: translateY(-4px);
+}
+
+/* 第一排信息：日期 + 周几 */
+.date-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-top: 6px;
+}
+
+.date-row .weekday {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* 第二排：农历 */
+.lunar-row {
+  font-size: 12px;
+  opacity: 0.82;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}

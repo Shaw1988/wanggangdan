@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="character.css" />
+    <title>王钢蛋</title>
+  </head>
+  <body>
+    <div class="stage">
+      <!-- 王钢蛋本体 -->
+      <div class="pet" id="pet">
+        <img class="layer" data-index="1" src="../assets/char1.png" alt="" draggable="false" />
+        <img class="layer" data-index="2" src="../assets/char2.png" alt="" draggable="false" />
+        <img class="layer" data-index="3" src="../assets/char3.png" alt="" draggable="false" />
+      </div>
+
+      <!-- 数字时钟：大号时:分 + 小秒 / 日期+周几 / 农历 -->
+      <div class="card clock" id="clock">
+        <div class="background-design">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="time-row">
+          <span class="time-main" id="clockTime">--:--</span>
+          <span class="time-sec" id="clockSecond">--</span>
+        </div>
+        <div class="date-row">
+          <span id="clockDate">----/--/--</span>
+          <span class="weekday" id="clockWeekday">周X</span>
+        </div>
+        <div class="lunar-row" id="clockLunar">农历--</div>
+      </div>
+    </div>
+    <script src="character.js"></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>待办</title>
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <div class="stage">
+    <div class="glass" id="glass">
+      <div class="roll-clip">
+        <div class="sheen"></div>
+        <div class="noise"></div>
+        <div class="inner">
+          <header class="head">
+            <span class="title">待办</span>
+            <span class="count" id="count">0 项</span>
+          </header>
+          <main class="list-wrap">
+            <div class="list" id="list"></div>
+            <div class="empty" id="empty">
+              <b>还没有待办</b>
+              <span>在下面写一条吧</span>
+            </div>
+          </main>
+          <footer class="foot">
+            <div class="input-shell">
+              <input id="input" type="text" placeholder="点击此处添加待办" autocomplete="off" spellcheck="false" maxlength="300" />
+              <span class="enter-hint">↵</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+      <div class="roller"></div>
+    </div>
+  </div>
+  <script src="panel.js"></script>
+</body>
+</html>

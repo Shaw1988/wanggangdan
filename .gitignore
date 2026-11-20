@@ -1,0 +1,8 @@
+node_modules/
+dist/
+vendor/
+assets/raw*.png
+assets/src*.png
+*.log
+.DS_Store
+Thumbs.db

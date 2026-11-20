@@ -1,0 +1,57 @@
+{
+  "name": "wanggangdan",
+  "version": "0.2.1",
+  "description": "王钢蛋 - 悬浮在桌面上的待办小助手",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test:parser": "node scripts/test-parser.js",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder --win nsis"
+  },
+  "author": "Shaw1988",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.wanggangdan.todo",
+    "productName": "王钢蛋",
+    "copyright": "Shaw1988",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "assets/char*.png",
+      "assets/tray.png",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "artifactName": "WangGangDan-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "王钢蛋",
+      "uninstallDisplayName": "王钢蛋",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
