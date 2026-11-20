@@ -22,12 +22,14 @@
 
 ## 运行
 
-需要 Node.js 18+，Windows 10 / 11。
+需要 Node.js 22.12+（Electron 45 的要求）和 npm，Windows 10 / 11。
 
 ```bash
 npm install
 npm start
 ```
+
+首次 `npm install` 会下载约 100MB 的 Electron 运行时，需要联网。
 
 打包安装程序：
 
